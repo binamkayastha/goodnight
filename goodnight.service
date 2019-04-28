@@ -1,0 +1,16 @@
+[Unit]
+Description=GoodnightRoutineOptimizer
+Wants=network-online.target
+After=network-online.target
+Wants=systemd-timesyncd.service
+After=systemd-timesyncd.service
+
+[Service]
+Environment=DISPLAY=:0
+Type=simple
+Restart=always
+User=pi
+ExecStart=/usr/bin/python3 -u /home/pi/AIY-projects-python/src/examples/voice/keurig.py --language en-US
+
+[Install]
+WantedBy=multi-user.target

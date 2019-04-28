@@ -1,0 +1,12 @@
+rituals:
+  - task: Brush Teeth
+    time: 2
+  - task: Wash Dishes
+    time: 5
+  - task: Take a shower
+    time: 20
+  - task: Pack your bag
+    time: 2
+bedtime:
+  hour: 23
+  minute: 30 # optional
