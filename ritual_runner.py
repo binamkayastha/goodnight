@@ -1,10 +1,14 @@
 import schedule
+from typing import Dict, List
 from datetime import datetime, timedelta
+
+from aiy.voicehat import get_button
 from aiy.audio import say
 from aiy.leds import Leds, Color
+
 from config_manager import update_config_times
 
-button = aiy.voicehat.get_button()
+button = get_button()
 leds = Leds()
 
 
@@ -43,4 +47,5 @@ def _doing(name: str) -> timedelta:
     start_time = datetime.now()
     button.wait_for_press()
     end_time = datetime.now()
+    diff = end_time - start_time
     return diff

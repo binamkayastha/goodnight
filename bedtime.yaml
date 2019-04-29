@@ -8,5 +8,5 @@ rituals:
   - task: Pack your bag
     time: 2
 bedtime:
-  hour: 23
-  minute: 30 # optional
+  hour: 22
+  minute: 0 # optional

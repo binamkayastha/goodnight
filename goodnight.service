@@ -10,7 +10,7 @@ Environment=DISPLAY=:0
 Type=simple
 Restart=always
 User=pi
-ExecStart=/usr/bin/python3 -u /home/pi/AIY-projects-python/src/examples/voice/keurig.py --language en-US
+ExecStart=/usr/local/bin/python3.7 -u /home/pi/goodnight/main.py --language en-US
 
 [Install]
 WantedBy=multi-user.target

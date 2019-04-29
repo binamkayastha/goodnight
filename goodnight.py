@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 from datetime import date, datetime, timedelta
+from pytz import timezone, utc
 from typing import Dict, List
 
+eastern = timezone('US/Eastern')
 
 def get_start_time(config: Dict, current_date: date) -> datetime:
     ritual_time = get_ritual_time(config.get("rituals"))
@@ -14,6 +16,10 @@ def get_start_time(config: Dict, current_date: date) -> datetime:
         hour=bedtime_hour,
         minute=bedtime_minute
     )
+    # https://stackoverflow.com/a/18862958
+    # Convert to UTC for application to use
+    bedtime = eastern.localize(bedtime).astimezone(utc)
+
     start_time = bedtime - timedelta(minutes=ritual_time)
     return start_time
 

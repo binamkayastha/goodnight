@@ -37,12 +37,15 @@ Data is logged as a list of json files
 """
 import schedule
 from datetime import datetime
+from pytz import timezone
 from time import sleep, strftime
 from typing import Dict, List
 
 import goodnight
 import ritual_runner
 import config_manager
+
+eastern = timezone('US/Eastern')
 
 
 def main():
@@ -55,7 +58,7 @@ def main():
         config: Dict = config_manager.get_config()
         rituals: List[Dict] = config.get("rituals")
         validate(config)
-        current_date = datetime.now().date()
+        current_date = eastern.localize(datetime.now()).date()
         start_time: datetime = goodnight.get_start_time(config, current_date)
         schedule_ritual(start_time, rituals)
         run_while_scheduled_job_exists()
@@ -68,8 +71,10 @@ def validate(config: Dict):
 
 def schedule_ritual(start_time: datetime, rituals: List[Dict]):
     value = start_time.strftime("%H:%M")
-    value = "03:04"
-    print(f"Scheduling job for: {value}")
+    print(f"Scheduling job for: {value} UTC, it is currently {datetime.now()} UTC")
+    eastern_value = start_time.astimezone(eastern).strftime("%H:%M")
+    current_eastern = datetime.now().astimezone(eastern)
+    print(f"Scheduling job for: {eastern_value} EST, it is currently {current_eastern} EST")
     schedule.every().day.at(value).do(
             ritual_runner.run_rituals, rituals=rituals)
 

@@ -33,9 +33,19 @@ this repository.
 Then create a soft link from the goodnight.service file to the systemd
 folder
 
+    pip3.7 install -r requirements.txt
     sudo ln -s `pwd`/goodnight.service /lib /systemd/system
 
 Then use systemctl commands to start/stop/debug `goodnight.service`
+
+You may have to install Python37 manually:
+https://serverfault.com/questions/918335/best-way-to-run-python-3-7-on-ubuntu-16-04-which-comes-with-python-3-5
+
+
+When you update the .service file, don't forget to run
+
+    sudo systemctl restart goodnight
+    sudo systemctl daemon-reload
 
 ### Entry point
 VoiceKit uses systemctl to start programs. The entrypoint is defined in the service file (goodnight.service)
@@ -45,4 +55,4 @@ goodnight.service runs main.py
 
 ## FAQs
 
-How to run your script on startup: https://aiyprojects.withgoogle.com/voice/#makers-guide-3-4--run-your-app-automatically
+How to run your script on startup: https://aiyprojects.withgoogle.com/voice/#makers-guide--run-your-app-at-bootup
